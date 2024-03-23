@@ -141,13 +141,13 @@ cd Teachable-Dl
 3. Set up the environment
 
 ```sh
-python3 -m venv env
+python -m venv env
 ```
 
 4. Activate the environment
 
 ```sh
-source env/bin/activate
+env\Scripts\activate
 ```
 
 5. Install the requirements
@@ -165,19 +165,19 @@ pip install -r requirements.txt
 Activate the environment
 
 ```sh
-source env/bin/activate
+env\Scripts\activate
 ```
 
 Run the program
 
 ```sh
-python3 main.py --url <course_url> --email <email> --password <password>
+python main.py --url <course_url> --email <email> --password <password>
 ```
 
 or run with manual login
 
 ```sh
-python3 main.py --url <course_url> --man_login_url <man_login_url> --verbose
+python main.py --url <course_url> --man_login_url <man_login_url> --verbose
 ```
 
 > Make sure to navigate to the url within the first tab and check the console for an exact url match.
