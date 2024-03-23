@@ -237,6 +237,10 @@ Project Link: [https://github.com/FallingLights/Teachable-Dl](https://github.com
 - [merberich](https://github.com/merberich)
 - [Green0Photon](https://github.com/Green0Photon)
 
+## Usage Notes
+
+- [Password with Dollar Sign ($)](https://stackoverflow.com/questions/37278749/python-argparse-stops-parsing-after-it-encounters)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
