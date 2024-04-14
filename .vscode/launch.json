@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": "--url <course url> --email <email> --password '<password; if with dollar sign escape it e.g. \\$>'"
+            "args": "--slug <course slug> --dashboard <dashboard page> --url <course url> --login_url <login url> --email <email> --password '<password; if with dollar sign escape it e.g. \\$>'"
         }
     ]
 }
