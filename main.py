@@ -319,8 +319,11 @@ class ThinkificDownloader:
                 # Remove new line characters from the title and replace spaces with -
                 # title = clean_string(video.text)
                 # title = clean_string(video_title.text)
-                title_split = str(link).split('lessons')
-                title = clean_string(title_split[1].strip('/'))
+                title_split = str(link).split('/')
+                try:
+                    title = clean_string(title_split[len(title_split) - 1].strip('/'))
+                except Exception as err:
+                    pass
                 logging.info("Found lecture: " + title)
                 truncated_title = truncate_title_to_fit_file_name(title)
                 video_entity = {"link": link, "title": truncated_title, "idx": idx, "download_path": download_path}
