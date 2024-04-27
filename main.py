@@ -339,43 +339,44 @@ class ThinkificDownloader:
             self.driver.get(dashboard)
             self.driver.implicitly_wait(5)
         
-        div_covers = self.driver.find_elements(By.CLASS_NAME, 'category-item__image')
+        div_covers = self.driver.find_elements(By.CLASS_NAME, 'cat-course-card')
         
         for div_cover in div_covers:
-            div_cover_href = div_cover.get_attribute("href")
+            div_cover_href = div_cover.get_attribute("data-href")
             if slug in div_cover_href:
                 img_cover = div_cover.find_element(By.TAG_NAME, 'img')
-                img_cover_style = img_cover.get_attribute("style")
-                # Regular expression pattern
-                pattern = r'background-image:\s*url\("([^"]+)"\);'
-                # Extracting URL
-                matches = re.search(pattern, img_cover_style)
-                if matches:
-                    image_link = matches.group(1)
-                    print(image_link)
+                image_link = img_cover.get_attribute("src")
+                # img_cover_style = img_cover.get_attribute("style")
+                # # Regular expression pattern
+                # pattern = r'background-image:\s*url\("([^"]+)"\);'
+                # # Extracting URL
+                # matches = re.search(pattern, img_cover_style)
+                # if matches:
+                #     image_link = matches.group(1)
+                #     print(image_link)
 
-                    # Download course image
+                # Download course image
+                try:
+                    logging.info("Downloading course image")
+                    # Save image
+                    image_path = os.path.join(course_path, "course-image.jpg")
+                    # send a GET request to the image link
                     try:
-                        logging.info("Downloading course image")
-                        # Save image
-                        image_path = os.path.join(course_path, "course-image.jpg")
-                        # send a GET request to the image link
-                        try:
-                            response = requests.get(image_link)
-                            # write the image data to a file
-                            with open(image_path, "wb") as f:
-                                f.write(response.content)
-                            # print a message indicating that the image was downloaded
-                            logging.info("Image downloaded successfully.")
-                        except Exception as e:
-                            # print a message indicating that the image download failed
-                            logging.warning("Failed to download image:" + str(e))
+                        response = requests.get(image_link)
+                        # write the image data to a file
+                        with open(image_path, "wb") as f:
+                            f.write(response.content)
+                        # print a message indicating that the image was downloaded
+                        logging.info("Image downloaded successfully.")
                     except Exception as e:
-                        logging.warning("Could not find course image: " + str(e))
-                        pass
+                        # print a message indicating that the image download failed
+                        logging.warning("Failed to download image:" + str(e))
+                except Exception as e:
+                    logging.warning("Could not find course image: " + str(e))
+                    pass
                             
-                else:
-                    print("No background image URL found.")
+                # else:
+                #     print("No background image URL found.")
 
     def download_videos_from_links(self, video_list):
         for video in video_list:
