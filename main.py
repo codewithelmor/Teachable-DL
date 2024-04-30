@@ -314,24 +314,36 @@ class ThinkificDownloader:
 
             idx = 1
             for bar in bars:
+                time.sleep(5)
                 video = bar.find_element(By.CSS_SELECTOR, ".course-player__content-item__link")
                 
-                # video_title = video.find_element(By.CLASS_NAME, "content-item__title")
-                video_title = video.find_element(By.CSS_SELECTOR, "._content-item__title_nffvg8")                
-                video_title_split = str(video_title.text).split("\nVIDEO\n")
-                title = clean_string(video_title_split[0])
-                
                 link = video.get_attribute("href")
-                
+
+                #v1
                 # Remove new line characters from the title and replace spaces with -
                 # title = clean_string(video.text)
+
+                #v2
+                # video_title = video.find_element(By.CLASS_NAME, "content-item__title")
+                # Remove new line characters from the title and replace spaces with -
                 # title = clean_string(video_title.text)
                 
-                # title_split = str(link).split('/')
+                #v3
+                # video_title = video.find_element(By.CSS_SELECTOR, "._content-item__title_nffvg8")                
+                # video_title_split = str(video_title.text).split("\nVIDEO\n")
                 # try:
-                #     title = clean_string(title_split[len(title_split) - 1].strip('/'))
+                #     # Remove new line characters from the title and replace spaces with -
+                #     title = clean_string(video_title_split[0])
                 # except Exception as err:
                 #     pass
+                
+                #v3
+                title_split = str(link).split('/')
+                try:
+                    # Remove new line characters from the title and replace spaces with -
+                    title = clean_string(title_split[len(title_split) - 1].strip('/'))
+                except Exception as err:
+                    pass
 
                 logging.info("Found lecture: " + title)
                 truncated_title = truncate_title_to_fit_file_name(title)
