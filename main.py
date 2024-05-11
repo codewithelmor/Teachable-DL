@@ -325,7 +325,9 @@ class ThinkificDownloader:
                 video_title_soup = BeautifulSoup(video_title_html, 'html.parser')
                 title_text = video_title_soup.get_text()
                 title_text_split = title_text.split()
-                title = clean_string(title_text_split[0])
+                title_raw = ' '.join(title_text_split[:-4])
+                title = clean_string(title_raw)
+                title = str(title).strip('-')
 
                 logging.info("Found lecture: " + title)
                 truncated_title = truncate_title_to_fit_file_name(title)

@@ -8,7 +8,7 @@
             "name": "Python Debugger: Current File with Arguments",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": "--slug <course slug> --dashboard <dashboard page> --url <course url> --login_url <login url> --email <email> --password '<password; if with dollar sign escape it e.g. \\$>'"
         }
